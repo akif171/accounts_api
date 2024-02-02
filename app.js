@@ -12,7 +12,7 @@ const cookieParser = require("cookie-parser");
 const PORT = 5000;
 connectDB();
 const corsOptions = {
-  origin: true, //included origin as true
+  origin: "http://localhost:3000", //included origin as true
   credentials: true, //included credentials as true
 };
 
