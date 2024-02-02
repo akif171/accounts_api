@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const jouurnalRoutes = require("./routes/journal");
@@ -19,7 +20,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-
+ 
 //Routes
 app.use("/api/journal", jouurnalRoutes);
 app.use("/api/ledger", ledgerRoutes);

@@ -2,8 +2,8 @@ const Transaction = require("../models/Transaction");
 
 const getAllEntries = async (req, res) => {
   const { account } = req.query;
-  console.log(account);
-
+  // console.log(req.cookies);
+ 
   let transactions;
   try {
     if (account) {
@@ -13,12 +13,9 @@ const getAllEntries = async (req, res) => {
           { "credit.account_name": account },
         ],
       });
-    }
-    else{
-
+    } else {
       transactions = await Transaction.find({});
     }
-
 
     return res.status(200).json(transactions);
   } catch (error) {

@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const createUser = async (req, res) => {
   //   console.log(req.body);
@@ -34,6 +35,43 @@ const createUser = async (req, res) => {
   }
 };
 
+const userLogin = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(300).json({ msg: "User does not exists." });
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      return res.status(300).json({ msg: "Invalid credentials." });
+    }
+    const payload = {
+      userId: user._id,
+      email: user.email,
+    };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.cookie("auth-token", token, { httpOnly: true, maxAge: 1000 * 60 * 60 });
+    return res.status(200).json({ token });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "bad request." });
+  }
+};
+
+const userLogout = async (req, res) => {
+  res.clearCookie("auth-token");
+  return res.status(200).json({ msg: "you are Loged Out. " });
+};
+
 module.exports = {
   createUser,
+  userLogin,
+  userLogout,
 };
