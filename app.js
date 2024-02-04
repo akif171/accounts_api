@@ -14,6 +14,7 @@ connectDB();
 const corsOptions = {
   origin: "http://localhost:3000", //included origin as true
   credentials: true, //included credentials as true
+
 };
 
 //middlewares
