@@ -59,7 +59,7 @@ const userLogin = async (req, res) => {
 
     res.cookie("auth-token", token, {
       httpOnly: true,
-      expires: 1000 * 6 * 60,
+      maxAge: 1000 * 6 * 60,
       secure: true, // Set to true if served over HTTPS
       sameSite: "None",
       path: "/",
