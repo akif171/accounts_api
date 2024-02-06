@@ -56,10 +56,12 @@ const userLogin = async (req, res) => {
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7); // Expires in 7 days
 
     res.cookie("auth-token", token, {
       httpOnly: true,
-      maxAge: 1000 * 6 * 60,
+      expires: expirationDate,
       secure: true, // Set to true if served over HTTPS
       sameSite: "None",
       path: "/",
