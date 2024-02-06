@@ -12,16 +12,15 @@ const cookieParser = require("cookie-parser");
 const PORT = 5000;
 connectDB();
 const corsOptions = {
-  origin: "http://localhost:3000", //included origin as true
+  origin: "https://accouts-app-frontend.vercel.app", //included origin as true
   credentials: true, //included credentials as true
-
 };
 
 //middlewares
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
- 
+
 //Routes
 app.use("/api/journal", jouurnalRoutes);
 app.use("/api/ledger", ledgerRoutes);
