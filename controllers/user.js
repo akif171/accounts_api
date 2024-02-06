@@ -61,6 +61,7 @@ const userLogin = async (req, res) => {
       httpOnly: true,
       maxAge: 1000 * 6 * 60,
       secure: true, // Set to true if served over HTTPS
+      path: "/",
     });
     return res.status(200).json({ token });
   } catch (error) {
