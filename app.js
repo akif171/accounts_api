@@ -12,7 +12,7 @@ const cookieParser = require("cookie-parser");
 const PORT = 5000;
 connectDB();
 const corsOptions = {
-  origin: "https://accouts-app-frontend.vercel.app", //included origin as true
+  origin: true, //included origin as true
   credentials: true, //included credentials as true
 };
 
