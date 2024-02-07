@@ -65,6 +65,7 @@ const userLogin = async (req, res) => {
       secure: true, // Set to true if served over HTTPS
       sameSite: "None",
       path: "/",
+      domain: "https://accouts-app-frontend.vercel.app",
     });
     return res.status(200).json({ token });
   } catch (error) {
